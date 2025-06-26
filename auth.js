@@ -25,12 +25,12 @@ class AuthManager {
         sessionStorage.removeItem('juscatz_login_time');
         
         // Redirect to login page
-        window.location.href = 'pages/login.html';
+        window.location.href = 'login/login.html';
     }
 
     static requireAuth() {
         if (!this.isLoggedIn()) {
-            window.location.href = 'pages/login.html';
+            window.location.href = 'login/login.html';
             return false;
         }
         return true;

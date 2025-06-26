@@ -1,0 +1,109 @@
+/* Home Page Styles - Prefixed with home- */
+
+.home-page {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.home-feed-container {
+  width: 100%;
+}
+
+.home-feed-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 20px;
+}
+
+.home-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.home-post {
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  background: white;
+  overflow: hidden;
+}
+
+.home-post-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.home-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.home-post-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-username {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.home-post-time {
+  color: #666;
+  font-size: 12px;
+}
+
+.home-post-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.home-post-actions {
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.home-action-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.home-action-btn:hover {
+  transform: scale(1.1);
+}
+
+.home-post-info {
+  padding: 0 15px 15px;
+}
+
+.home-likes-count {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.home-post-caption {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.home-loading {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+  font-style: italic;
+}
