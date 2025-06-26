@@ -1,0 +1,58 @@
+/* Global styles for index page */
+:root {
+  --header-height: 60px;
+  --bottom-nav-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #fafafa;
+  margin: 0 !important;
+}
+
+/* Post-related styles for feed and other pages */
+.post {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.post-actions {
+  padding: 15px;
+}
+
+.post-actions button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.post-caption {
+  padding: 0 15px 15px;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JusCatz - Cat Social Media</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <!-- Empty filler for spacing -->
+        </div>
+
+        <div class="header-center">
+          <h1 class="user-profile-name" id="userProfileName">@testuser</h1>
+        </div>
+
+        <div class="header-right">
+          <button
+            class="header-btn"
+            id="notifications-btn"
+            aria-label="Notifications"
+          >
+            <svg
+              class="header-icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 19V20H3V19L5 17V11C5 7.9 7.03 5.17 10 4.29C10 4.19 10 4.1 10 4C10 2.34 11.34 1 13 1C14.66 1 16 2.34 16 4C16 4.1 16 4.19 16 4.29C18.97 5.17 21 7.9 21 11V17L23 19ZM19 17V11C19 8.24 16.76 6 14 6H12C9.24 6 7 8.24 7 11V17L5 19H19L19 17Z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+
+          <button class="header-btn" id="settings-btn" aria-label="Settings">
+            <svg
+              class="header-icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="6" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="18" cy="12" r="1.5" fill="currentColor" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Page content will be loaded here -->
+        <div id="page-content">
+          <!-- Default to home page -->
+          <img
+            src="images/fuhktong.png"
+            alt="Fuhktong Cat"
+            style="max-width: 100%; height: auto"
+          />
+        </div>
+      </main>
+
+      <!-- Navigation -->
+      <nav class="bottom-nav">
+        <button class="nav-btn active" data-page="home">
+          <span class="nav-icon">
+            <img src="images/home.svg" alt="Home" width="20" height="20"
+          /></span>
+        </button>
+        <button class="nav-btn" data-page="search">
+          <span class="nav-icon">
+            <img src="images/search.svg" alt="Search" width="20" height="20" />
+          </span>
+        </button>
+        <button class="nav-btn" data-page="post">
+          <span class="nav-icon">
+            <img src="images/post.svg" alt="Post" width="20" height="20" />
+          </span>
+        </button>
+        <button class="nav-btn" data-page="activity">
+          <span class="nav-icon">
+            <img src="images/bops.png" alt="Bops" width="20" height="20"
+          /></span>
+        </button>
+        <button class="nav-btn" data-page="profile">
+          <span class="nav-icon">
+            <img
+              src="images/profile.svg"
+              alt="Profile"
+              width="20"
+              height="20"
+            />
+          </span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

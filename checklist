@@ -1,0 +1,257 @@
+juscatz - Cat Social Media App Development Checklist
+
+JUSCATZ APP DEVELOPMENT CHECKLIST & CONSTRAINTS
+TECHNOLOGY STACK - STRICT REQUIREMENTS:
+
+Frontend: HTML, CSS, and vanilla JavaScript ONLY
+Mobile wrapper: Capacitor ONLY
+NO frameworks (React, Vue, Angular, etc.)
+NO build processes during development
+NO npm run build requirements
+Keep it simple like PHP development workflow
+
+DEVELOPMENT PRINCIPLES:
+
+Edit files directly and see changes immediately
+Use plain web technologies that can be uploaded/modified easily
+Focus on HTML structure, CSS styling, and vanilla JS functionality
+Test in browser first, then wrap with Capacitor for mobile
+
+CSS ORGANIZATION RULES
+File Structure:
+
+Each HTML file gets its own dedicated CSS file
+Example: index.html → index.css, profile.html → profile.css
+
+CSS Scope Requirements:
+
+All CSS must be unique to its specific file
+Use file-specific class names to prevent overlap
+Prefix classes with the page name (e.g., home-, profile-, feed-)
+
+Each file is completely self-contained
+Better to duplicate some CSS than create conflicts
+
+WHEN ASKING FOR HELP:
+Always specify: "Use only HTML, CSS, and vanilla JavaScript with Capacitor. No frameworks, no build processes. 
+Keep it simple and directly editable like PHP development."
+
+REMIND ANY LLM:
+"I want to keep this project simple - just HTML/CSS/JS files that I can edit directly, like working with PHP. 
+Use Capacitor only for mobile app conversion. No complex frameworks or build systems."
+
+==== CORE FEATURES ====
+
+USER MANAGEMENT
+□ User registration (email/phone)
+□ User login/logout
+□ Password reset functionality
+□ User profile creation and editing
+□ Profile picture upload
+□ Bio and personal information
+□ Privacy settings (public/private accounts)
+□ Account verification system
+□ User following/followers system
+□ Block/unblock users
+□ Report users functionality
+
+POSTING & CONTENT
+□ Camera integration for taking photos
+□ Photo gallery access
+□ Photo editing tools (filters, cropping, brightness)
+□ Caption writing interface
+□ Hashtag support ("#catsofinsta")
+□ Location tagging
+□ Photo upload and storage
+□ Post visibility settings
+□ Delete posts functionality
+□ Edit post captions
+
+AI CAT DETECTION
+□ Machine learning model for cat recognition
+□ Image preprocessing pipeline
+□ Real-time image analysis
+□ Rejection system for non-cat images
+□ Appeals process for false rejections
+□ Model training and updates
+□ Confidence scoring system
+
+SEARCH & DISCOVERY
+□ Search users by username/name
+□ Search hashtags
+□ Search by location
+□ Trending hashtags
+□ Explore page with recommended content
+□ Search history
+□ Advanced search filters
+
+SOCIAL INTERACTIONS
+□ Like posts
+□ Comment on posts
+□ Reply to comments
+□ Share posts
+⚠️ NO MESSAGING SYSTEM - Keep it simple
+□ Story/temporary posts feature
+□ Push notifications for interactions
+□ Activity feed
+
+==== TECHNICAL INFRASTRUCTURE ====
+
+CAPACITOR MOBILE DEVELOPMENT
+□ Web app development (HTML/CSS/JavaScript or framework like React/Vue/Angular)
+□ Capacitor project initialization
+□ Capacitor plugins setup (@capacitor/camera, @capacitor/filesystem, etc.)
+□ iOS platform configuration and build setup
+□ Android platform configuration and build setup
+□ Native plugin integration
+□ Camera plugin implementation
+□ Filesystem plugin for photo storage
+□ Geolocation plugin for location tagging
+□ Push notifications plugin setup
+□ App permissions configuration (camera, storage, location)
+□ Capacitor CLI build and sync processes
+□ Native IDE testing (Xcode for iOS, Android Studio)
+□ App store optimization
+□ Capacitor live reload for development
+
+BACKEND SERVICES
+□ User authentication system
+□ Database design and setup
+□ API development (REST/GraphQL)
+□ File storage system (images/videos)
+□ Content delivery network (CDN)
+⚠️ NO MESSAGING SYSTEM - Keep it simple
+□ Caching system
+□ Load balancing
+□ Data backup and recovery
+
+SECURITY & PRIVACY
+□ Data encryption
+□ Secure API endpoints
+□ Privacy policy creation
+□ Terms of service
+□ GDPR compliance
+□ User data protection
+□ Content moderation system
+□ Spam detection
+
+==== BUSINESS FEATURES ====
+
+ADVERTISER ACCOUNTS
+□ Business account registration
+□ Advertiser verification process
+□ Ad creation interface
+□ Targeting options (demographics, interests)
+□ Budget and bidding system
+□ Ad analytics dashboard
+□ Payment processing for ads
+□ Ad approval workflow
+□ Sponsored post features
+
+MONETIZATION
+□ In-app purchases
+□ Premium account features
+□ Ad revenue system
+□ Creator monetization tools
+□ Affiliate marketing integration
+□ Subscription model options
+
+==== DEPLOYMENT & OPERATIONS ====
+
+DEVELOPMENT ENVIRONMENT
+□ Version control setup (Git)
+□ Node.js and npm/yarn setup
+□ Capacitor CLI installation
+□ Web development environment setup
+□ Xcode setup (for iOS development)
+□ Android Studio setup (for Android development)
+□ Development team collaboration tools
+□ Code review process
+□ Automated testing setup (web app testing)
+□ Capacitor build automation
+□ Continuous integration/deployment
+□ Staging environment (web + mobile builds)
+□ Production environment setup
+
+APP STORE DEPLOYMENT
+□ Apple App Store registration
+□ Google Play Store registration
+□ App store screenshots and descriptions
+□ App store review process
+□ App versioning strategy
+□ Update distribution system
+
+MONITORING & ANALYTICS
+□ User analytics tracking
+□ Performance monitoring
+□ Error tracking and logging
+□ A/B testing framework
+□ User feedback collection
+□ App crash reporting
+
+==== LEGAL & COMPLIANCE ====
+
+LEGAL REQUIREMENTS
+□ Business registration
+□ Trademark registration
+□ Copyright protection
+□ Privacy policy
+□ Terms of service
+□ Cookie policy
+□ Age verification (13+ requirement)
+□ Content guidelines
+□ Community standards
+
+==== LAUNCH PREPARATION ====
+
+TESTING
+□ Unit testing
+□ Integration testing
+□ User acceptance testing
+□ Performance testing
+□ Security testing
+□ Beta testing program
+□ Device compatibility testing
+
+MARKETING & GROWTH
+□ Brand identity and logo
+□ Website creation
+□ Social media presence
+□ Influencer partnerships
+□ Launch strategy
+□ User acquisition plan
+□ Public relations strategy
+
+==== POST-LAUNCH ====
+
+ONGOING MAINTENANCE
+□ Bug fixes and updates
+□ Feature improvements
+□ Customer support system
+□ Community management
+□ Content moderation
+□ Performance optimization
+□ Security updates
+□ Scaling infrastructure
+
+FUTURE FEATURES
+□ Video posts support
+□ Live streaming
+□ Shopping integration
+□ Cat breed recognition
+□ Cat health tips integration
+□ Veterinarian partnerships
+□ Cat adoption features
+□ Advanced photo editing tools
+
+==== ESTIMATED TIMELINE ====
+□ Planning & Design: 2-3 months
+□ Backend Development: 4-6 months
+□ Web App + Capacitor Mobile Development: 4-6 months
+□ AI Model Development: 3-4 months
+□ Testing & QA: 2-3 months
+□ Legal & Compliance: 1-2 months
+□ Launch Preparation: 1-2 months
+
+TOTAL ESTIMATED TIME: 12-18 months for MVP
+TEAM SIZE RECOMMENDED: 8-12 developers, designers, and specialists

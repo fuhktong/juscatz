@@ -1,0 +1,15 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Roof -->
+  <polyline points="15,45 50,15 85,45" 
+            fill="none" 
+            stroke="#000" 
+            stroke-width="8" 
+            stroke-linejoin="miter"/>
+  
+  <!-- House body (three sides) -->
+  <polyline points="25,50 25,85 75,85 75,50" 
+            fill="none" 
+            stroke="#000" 
+            stroke-width="8" 
+            stroke-linejoin="miter"/>
+</svg>
