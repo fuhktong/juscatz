@@ -171,37 +171,25 @@ class LoginForm {
     }
 
     async submitLogin(formData) {
-        // Simulate API call - replace with actual endpoint
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simulate different outcomes for testing
-                const credentials = [
-                    { email: 'test@example.com', username: 'testuser', password: 'password123' },
-                    { email: 'admin@juscatz.com', username: 'admin', password: 'admin123' }
-                ];
-                
-                const isValidCredentials = credentials.some(cred => 
-                    (cred.email === formData.emailOrUsername || cred.username === formData.emailOrUsername) &&
-                    cred.password === formData.password
-                );
-                
-                if (isValidCredentials) {
-                    resolve({
-                        success: true,
-                        token: 'mock_jwt_token_' + Date.now(),
-                        user: {
-                            id: 1,
-                            username: formData.emailOrUsername.includes('@') ? 'testuser' : formData.emailOrUsername,
-                            email: formData.emailOrUsername.includes('@') ? formData.emailOrUsername : 'test@example.com',
-                            profilePicture: null,
-                            isVerified: true
-                        }
-                    });
-                } else {
-                    reject(new Error('Invalid email/username or password'));
-                }
-            }, 1500);
-        });
+        try {
+            const response = await fetch('/api/login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Login failed');
+            }
+
+            return result;
+        } catch (error) {
+            throw new Error(error.message || 'Network error occurred');
+        }
     }
 
     storeAuthData(response, rememberMe) {

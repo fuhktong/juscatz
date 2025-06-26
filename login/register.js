@@ -212,19 +212,25 @@ class RegisterForm {
     }
 
     async submitRegistration(formData) {
-        // Simulate API call - replace with actual endpoint
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simulate different outcomes for testing
-                const success = Math.random() > 0.3; // 70% success rate for demo
-                
-                if (success) {
-                    resolve({ success: true, message: 'Account created successfully!' });
-                } else {
-                    reject(new Error('Registration failed. Please try again.'));
-                }
-            }, 2000);
-        });
+        try {
+            const response = await fetch('/api/register.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Registration failed');
+            }
+
+            return result;
+        } catch (error) {
+            throw new Error(error.message || 'Network error occurred');
+        }
     }
 
     showSuccess() {
