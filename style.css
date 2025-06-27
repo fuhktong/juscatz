@@ -16,81 +16,9 @@ body {
   margin: 0 !important;
 }
 
-/* Page containers - shared styles for all pages */
-.home-page, .search-page, .post-page, .profile-page, .notifications-page, .settings-page {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Bops page has no padding to be full-screen */
-.bops-page {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 0;
-  height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
-  position: relative;
-  overflow: hidden;
-}
-
-/* Home Page / Feed Styles - moved to pages/home.css */
-
-/* Search Page Styles - moved to pages/search.css */
-
-/* Post Creation Styles - moved to pages/post.css */
-
-/* Profile Page Styles - moved to pages/profile.css */
-
-/* Bops Page Styles - moved to pages/bops.css */
-
-/* Loading States */
 .loading {
   text-align: center;
   color: #666;
   padding: 40px;
   font-style: italic;
-}
-
-/* Notifications Page Styles - moved to pages/notifications.css */
-
-/* Settings Page Styles - moved to pages/settings.css */
-
-/* Dark Mode Styles */
-.dark-mode {
-  background: #1a1a1a;
-  color: #ffffff;
-}
-
-.dark-mode .app {
-  background: #1a1a1a;
-}
-
-.dark-mode .top-header {
-  background: #2d2d2d;
-  border-bottom-color: #404040;
-}
-
-.dark-mode .bottom-nav {
-  background: #2d2d2d;
-  border-top-color: #404040;
-}
-
-/* Dark mode for specific page elements are handled in their respective CSS files */
-.dark-mode .home-post {
-  background: #2d2d2d;
-  border-color: #404040;
-}
-
-.dark-mode .settings-item {
-  border-color: #404040;
-}
-
-.dark-mode .notifications-item {
-  border-color: #404040;
-}
-
-.dark-mode .notifications-item.unread {
-  background-color: #1a2332;
 }

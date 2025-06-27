@@ -1,6 +1,52 @@
 // JusCatz Main App JavaScript - Core App Logic Only
 console.log("juscatz app loaded!");
 
+// Load header
+async function loadHeader() {
+    try {
+        // Load CSS first
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'header/header.css';
+        document.head.appendChild(link);
+        
+        // Load HTML
+        const response = await fetch('/header/header.html');
+        const html = await response.text();
+        
+        // Insert into the header container
+        const container = document.getElementById('header-container');
+        container.innerHTML = html;
+        
+        console.log('Header loaded successfully');
+    } catch (error) {
+        console.error('Failed to load header:', error);
+    }
+}
+
+// Load bottom navigation
+async function loadBottomNav() {
+    try {
+        // Load CSS first
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'bottomnav/bottomnav.css';
+        document.head.appendChild(link);
+        
+        // Load HTML
+        const response = await fetch('/bottomnav/bottomnav.html');
+        const html = await response.text();
+        
+        // Insert into the bottom nav container
+        const container = document.getElementById('bottom-nav-container');
+        container.innerHTML = html;
+        
+        console.log('Bottom navigation loaded successfully');
+    } catch (error) {
+        console.error('Failed to load bottom nav:', error);
+    }
+}
+
 // Check authentication on app load
 document.addEventListener('DOMContentLoaded', () => {
     // DEVELOPMENT MODE: Skip auth check for frontend development
@@ -14,7 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeApp() {
-    // Initialize header buttons
+    // Load header and bottom navigation
+    Promise.all([loadHeader(), loadBottomNav()]).then(() => {
+        // Initialize navigation after both are loaded
+        initializeNavigation();
+        initializeHeaderButtons();
+    });
+    
+    // Show user info
+    displayUserInfo();
+    
+    // Load home page by default
+    loadPage('home');
+}
+
+function initializeHeaderButtons() {
+    // Initialize header buttons after header is loaded
     const notificationsBtn = document.getElementById('notifications-btn');
     const settingsBtn = document.getElementById('settings-btn');
     
@@ -25,15 +86,6 @@ function initializeApp() {
     if (settingsBtn) {
         settingsBtn.addEventListener('click', handleSettings);
     }
-
-    // Initialize navigation
-    initializeNavigation();
-    
-    // Show user info
-    displayUserInfo();
-    
-    // Load home page by default
-    loadPage('home');
 }
 
 function handleNotifications() {

@@ -29,14 +29,12 @@ function initializeProfile() {
 
 // Initialize event listeners
 function initializeProfileEventListeners() {
-    const editProfileBtn = document.getElementById('editProfileBtn');
     const editProfileModal = document.getElementById('editProfileModal');
     const closeEditModal = document.getElementById('closeEditModal');
     const cancelEditBtn = document.getElementById('cancelEditBtn');
     const saveProfileBtn = document.getElementById('saveProfileBtn');
     const profilePictureInput = document.getElementById('profilePictureInput');
     const editProfilePictureBtn = document.getElementById('editProfilePictureBtn');
-    const profileSettingsBtn = document.getElementById('profileSettingsBtn');
     const editBio = document.getElementById('editBio');
     const bioCharCount = document.getElementById('bioCharCount');
 
@@ -49,10 +47,6 @@ function initializeProfileEventListeners() {
         });
     });
 
-    // Edit profile button
-    editProfileBtn.addEventListener('click', () => {
-        openEditProfileModal();
-    });
 
     // Close modal handlers
     closeEditModal.addEventListener('click', closeEditProfileModal);
@@ -75,12 +69,6 @@ function initializeProfileEventListeners() {
 
     profilePictureInput.addEventListener('change', handleProfilePictureUpload);
 
-    // Settings button
-    profileSettingsBtn.addEventListener('click', () => {
-        if (window.loadPage) {
-            window.loadPage('settings');
-        }
-    });
 
     // Bio character counting
     editBio.addEventListener('input', (e) => {
@@ -131,18 +119,12 @@ function displayUserProfile(user) {
     document.getElementById('followerCount').textContent = user.follower_count || 0;
     document.getElementById('followingCount').textContent = user.following_count || 0;
     
-    // Profile picture
+    // Profile picture - use user's picture or keep default
     const profilePicture = document.getElementById('profilePicture');
-    const profilePicturePlaceholder = document.getElementById('profilePicturePlaceholder');
-    
     if (user.profile_picture_url) {
         profilePicture.src = user.profile_picture_url;
-        profilePicture.style.display = 'block';
-        profilePicturePlaceholder.style.display = 'none';
-    } else {
-        profilePicture.style.display = 'none';
-        profilePicturePlaceholder.style.display = 'flex';
     }
+    // If no profile_picture_url, it keeps the default from HTML
 }
 
 // Switch tabs
@@ -367,11 +349,7 @@ async function handleProfilePictureUpload(e) {
         if (result.success) {
             // Update profile picture display
             const profilePicture = document.getElementById('profilePicture');
-            const profilePicturePlaceholder = document.getElementById('profilePicturePlaceholder');
-            
             profilePicture.src = result.profile_picture_url;
-            profilePicture.style.display = 'block';
-            profilePicturePlaceholder.style.display = 'none';
             
             showSuccessMessage('Profile picture updated!');
         }
