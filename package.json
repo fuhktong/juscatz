@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "mkdir -p dist && rsync -av --exclude=node_modules --exclude=.git --exclude=dist . dist/",
+    "cap:build": "npm run build && npx cap copy",
+    "cap:open:ios": "npx cap open ios",
+    "cap:open:android": "npx cap open android",
+    "cap:run:ios": "npm run cap:build && npx cap run ios",
+    "cap:run:android": "npm run cap:build && npx cap run android",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -10,7 +16,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@capacitor/android": "^7.4.0",
+    "@capacitor/camera": "^7.0.1",
     "@capacitor/cli": "^7.3.0",
-    "@capacitor/core": "^7.3.0"
+    "@capacitor/core": "^7.3.0",
+    "@capacitor/haptics": "^7.0.1",
+    "@capacitor/ios": "^7.4.0",
+    "@capacitor/push-notifications": "^7.0.1"
   }
 }

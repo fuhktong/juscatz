@@ -1,5 +1,8 @@
 {
   "appId": "com.yourname.juscatz",
-  "appName": "juscatz",
-  "webDir": "."
+  "appName": "JusCatz",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
 }
