@@ -1,83 +1,18 @@
 // Post Creation Page JavaScript
 
 // Load post creation page
-function loadPostPage(container) {
-    container.innerHTML = `
-        <div class="post-page">
-            <div class="post-create-container">
-                <div class="post-header">
-                    <h2>Create New Post</h2>
-                    <button class="post-cancel-btn" id="cancelBtn">Cancel</button>
-                </div>
-                
-                <div class="post-upload-section">
-                    <div class="post-upload-area" id="uploadArea">
-                        <div class="post-upload-placeholder" id="uploadPlaceholder">
-                            <div class="post-upload-icon">=ø</div>
-                            <p class="post-upload-text">Tap to upload cat photo or video</p>
-                            <p class="post-upload-subtext">JPG, PNG, MP4 up to 10MB</p>
-                        </div>
-                        <div class="post-preview-container" id="previewContainer" style="display: none;">
-                            <img class="post-preview-image" id="previewImage" style="display: none;">
-                            <video class="post-preview-video" id="previewVideo" controls style="display: none;"></video>
-                            <button class="post-remove-media" id="removeMediaBtn"></button>
-                        </div>
-                    </div>
-                    <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;">
-                </div>
-
-                <div class="post-form-section">
-                    <div class="post-input-group">
-                        <label for="captionInput" class="post-label">Caption</label>
-                        <textarea 
-                            id="captionInput" 
-                            class="post-caption-input" 
-                            placeholder="Write a caption... #hashtags"
-                            maxlength="2000"
-                        ></textarea>
-                        <div class="post-char-count">
-                            <span id="charCount">0</span>/2000
-                        </div>
-                    </div>
-
-                    <div class="post-input-group">
-                        <label for="locationInput" class="post-label">Location (Optional)</label>
-                        <input 
-                            type="text" 
-                            id="locationInput" 
-                            class="post-location-input" 
-                            placeholder="Add location..."
-                        >
-                    </div>
-
-                    <div class="post-settings">
-                        <div class="post-setting-item">
-                            <label class="post-setting-label">
-                                <input type="checkbox" id="allowCommentsCheckbox" checked>
-                                <span class="post-setting-text">Allow comments</span>
-                            </label>
-                        </div>
-                        <div class="post-setting-item">
-                            <label class="post-setting-label">
-                                <input type="checkbox" id="showInFeedCheckbox" checked>
-                                <span class="post-setting-text">Show in public feed</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="post-actions">
-                    <button class="post-submit-btn" id="postSubmitBtn" disabled>
-                        <span class="post-submit-text">Share Post</span>
-                        <span class="post-submit-loader" style="display: none;">=ä</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-
-    // Initialize post creation functionality
-    initializePostCreation();
+async function loadPostPage(container) {
+    try {
+        const response = await fetch('/posts/post.html');
+        const html = await response.text();
+        container.innerHTML = html;
+        
+        // Initialize post creation functionality
+        initializePostCreation();
+    } catch (error) {
+        console.error('Failed to load post page:', error);
+        container.innerHTML = '<div class="post-error">Failed to load post page</div>';
+    }
 }
 
 // Initialize post creation functionality
@@ -253,11 +188,8 @@ function initializePostCreation() {
             formData.append('show_in_feed', document.getElementById('showInFeedCheckbox').checked);
 
             // Submit to API
-            const response = await fetch('/api/posts.php', {
+            const response = await fetch('/posts/posts.php', {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${getAuthToken()}`
-                },
                 body: formData
             });
 
@@ -273,10 +205,10 @@ function initializePostCreation() {
             // Reset form
             resetForm();
             
-            // Navigate to home after short delay
+            // Navigate to profile after short delay
             setTimeout(() => {
                 if (window.loadPage) {
-                    window.loadPage('home');
+                    window.loadPage('profile');
                 }
             }, 2000);
 

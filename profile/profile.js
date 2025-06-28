@@ -3,7 +3,7 @@
 // Load profile page
 async function loadProfilePage(container) {
     try {
-        const response = await fetch('/pages/profile.html');
+        const response = await fetch('/profile/profile.html');
         const html = await response.text();
         container.innerHTML = html;
         
@@ -88,7 +88,7 @@ function initializeProfileEventListeners() {
 // Load user profile data
 async function loadUserProfile() {
     try {
-        const response = await fetch('/api/user.php', {
+        const response = await fetch('/profile/profile.php?action=get', {
             headers: {
                 'Authorization': `Bearer ${getAuthToken()}`
             }
@@ -99,8 +99,9 @@ async function loadUserProfile() {
         }
 
         const result = await response.json();
-        if (result.success) {
-            displayUserProfile(result.user);
+        console.log('Profile API result:', result);
+        if (result.success && result.profile) {
+            displayUserProfile(result.profile);
         }
     } catch (error) {
         console.error('Failed to load profile:', error);
@@ -111,20 +112,24 @@ async function loadUserProfile() {
 // Display user profile data
 function displayUserProfile(user) {
     document.getElementById('profileUsername').textContent = `@${user.username}`;
-    document.getElementById('profileDisplayName').textContent = user.display_name || '';
-    document.getElementById('profileBio').textContent = user.bio || '';
     
-    // Stats
+    // Create display name from first_name and last_name
+    const displayName = [user.first_name, user.last_name].filter(Boolean).join(' ') || user.username;
+    document.getElementById('profileDisplayName').textContent = displayName;
+    
+    // Set bio to empty since we removed it from users table
+    document.getElementById('profileBio').textContent = '';
+    
+    // Stats - only post_count is available now
     document.getElementById('postCount').textContent = user.post_count || 0;
-    document.getElementById('followerCount').textContent = user.follower_count || 0;
-    document.getElementById('followingCount').textContent = user.following_count || 0;
+    document.getElementById('followerCount').textContent = 0; // No longer tracked
+    document.getElementById('followingCount').textContent = 0; // No longer tracked
     
     // Profile picture - use user's picture or keep default
     const profilePicture = document.getElementById('profilePicture');
-    if (user.profile_picture_url) {
-        profilePicture.src = user.profile_picture_url;
+    if (user.profile_picture) {
+        profilePicture.src = user.profile_picture;
     }
-    // If no profile_picture_url, it keeps the default from HTML
 }
 
 // Switch tabs
@@ -161,29 +166,17 @@ async function loadUserPosts() {
     postsGrid.innerHTML = '<div class="profile-loading">Loading posts...</div>';
     
     try {
-        // For now, use mock data until we have user-specific posts API
-        const mockPosts = [
-            {
-                id: 1,
-                image_url: 'https://placekitten.com/300/300',
-                like_count: 42,
-                comment_count: 8
-            },
-            {
-                id: 2,
-                image_url: 'https://placekitten.com/301/301',
-                like_count: 38,
-                comment_count: 12
-            },
-            {
-                id: 3,
-                image_url: 'https://placekitten.com/302/302',
-                like_count: 51,
-                comment_count: 6
-            }
-        ];
+        // Fetch user's posts from API
+        const response = await fetch('/posts/posts.php?user_id=1');
+        const result = await response.json();
         
-        if (mockPosts.length === 0) {
+        if (!response.ok) {
+            throw new Error(result.error || 'Failed to load posts');
+        }
+        
+        const posts = result.posts || [];
+        
+        if (posts.length === 0) {
             postsGrid.innerHTML = `
                 <div class="profile-empty">
                     <div class="profile-empty-icon">📷</div>
@@ -194,19 +187,12 @@ async function loadUserPosts() {
                 </div>
             `;
         } else {
-            postsGrid.innerHTML = mockPosts.map(post => `
+            postsGrid.innerHTML = posts.map(post => `
                 <div class="profile-post-item" data-post-id="${post.id}">
                     <img src="${post.image_url}" alt="Post" class="profile-post-image">
                     <div class="profile-post-overlay">
                         <div class="profile-post-stats">
-                            <span class="profile-post-stat">
-                                <span class="profile-post-stat-icon">❤️</span>
-                                <span class="profile-post-stat-count">${post.like_count}</span>
-                            </span>
-                            <span class="profile-post-stat">
-                                <span class="profile-post-stat-icon">💬</span>
-                                <span class="profile-post-stat-count">${post.comment_count}</span>
-                            </span>
+                            <span class="profile-post-caption">${post.caption || ''}</span>
                         </div>
                     </div>
                 </div>
@@ -333,11 +319,8 @@ async function handleProfilePictureUpload(e) {
         const formData = new FormData();
         formData.append('profile_picture', file);
         
-        const response = await fetch('/api/user.php', {
+        const response = await fetch('/profile/profile.php', {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${getAuthToken()}`
-            },
             body: formData
         });
         
@@ -349,7 +332,7 @@ async function handleProfilePictureUpload(e) {
         if (result.success) {
             // Update profile picture display
             const profilePicture = document.getElementById('profilePicture');
-            profilePicture.src = result.profile_picture_url;
+            profilePicture.src = result.profile_picture;
             
             showSuccessMessage('Profile picture updated!');
         }

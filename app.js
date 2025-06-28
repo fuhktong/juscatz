@@ -100,8 +100,9 @@ function handleNotifications() {
 function handleSettings() {
     console.log('Settings clicked');
     loadPageWithJS('settings', () => {
-        if (window.SettingsPage) {
-            window.SettingsPage.loadSettingsPage();
+        const contentArea = document.getElementById('page-content');
+        if (window.SettingsPage && contentArea) {
+            window.SettingsPage.loadSettingsPage(contentArea);
         }
     });
 }
@@ -122,7 +123,8 @@ function loadPage(page) {
     
     // Update active state
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`[data-page="${page}"]`).classList.add('active');
+    const activeBtn = document.querySelector(`[data-page="${page}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
     
     // Load page content
     const contentArea = document.getElementById('page-content');
@@ -190,33 +192,72 @@ function loadPageCSS(pageName) {
     // Load new page CSS
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `pages/${pageName}.css`;
+    if (pageName === 'profile') {
+        link.href = `profile/profile.css`;
+    } else if (pageName === 'post') {
+        link.href = `posts/post.css`;
+    } else if (pageName === 'settings') {
+        link.href = `settings/settings.css`;
+    } else if (pageName === 'edit-profile') {
+        link.href = `settings/edit-profile.css`;
+    } else if (pageName === 'privacy') {
+        link.href = `settings/privacy.css`;
+    } else if (pageName === 'change-password') {
+        link.href = `settings/change-password.css`;
+    } else {
+        link.href = `pages/${pageName}.css`;
+    }
     link.setAttribute('data-page-css', pageName);
     document.head.appendChild(link);
 }
 
-// Load page-specific JavaScript
-function loadPageJS(pageName) {
-    // Remove any existing page JS
+
+// Load page with both CSS and JS, then execute callback
+function loadPageWithJS(pageName, callback) {
+    // Clear content first to prevent flash
+    const contentArea = document.getElementById('page-content');
+    if (contentArea) {
+        contentArea.innerHTML = '<div class="loading">Loading...</div>';
+    }
+    
+    loadPageCSS(pageName);
+    
+    // Load JS and wait for it to actually load
+    const script = document.createElement('script');
+    if (pageName === 'profile') {
+        script.src = `profile/profile.js`;
+    } else if (pageName === 'post') {
+        script.src = `posts/post.js`;
+    } else if (pageName === 'settings') {
+        script.src = `settings/settings.js`;
+    } else if (pageName === 'edit-profile') {
+        script.src = `settings/edit-profile.js`;
+    } else if (pageName === 'privacy') {
+        script.src = `settings/privacy.js`;
+    } else if (pageName === 'change-password') {
+        script.src = `settings/change-password.js`;
+    } else {
+        script.src = `pages/${pageName}.js`;
+    }
+    script.setAttribute('data-page-js', pageName);
+    
+    // Wait for script to load before executing callback
+    script.onload = () => {
+        setTimeout(callback, 50); // Small delay to ensure everything is ready
+    };
+    
+    script.onerror = () => {
+        console.error(`Failed to load ${pageName}.js`);
+        callback(); // Still try to execute callback
+    };
+    
+    // Remove any existing page JS first
     const existingPageJS = document.querySelector('script[data-page-js]');
     if (existingPageJS) {
         existingPageJS.remove();
     }
     
-    // Load new page JS
-    const script = document.createElement('script');
-    script.src = `pages/${pageName}.js`;
-    script.setAttribute('data-page-js', pageName);
     document.head.appendChild(script);
-}
-
-// Load page with both CSS and JS, then execute callback
-function loadPageWithJS(pageName, callback) {
-    loadPageCSS(pageName);
-    loadPageJS(pageName);
-    
-    // Wait for script to load before executing callback
-    setTimeout(callback, 200);
 }
 
 // Utility function - format large numbers

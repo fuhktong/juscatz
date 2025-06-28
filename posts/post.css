@@ -4,7 +4,7 @@
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 20px 100px 20px; /* Added extra bottom padding for navigation */
 }
 
 .post-create-container {

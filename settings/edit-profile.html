@@ -1,0 +1,151 @@
+<div class="edit-profile-page">
+  <div class="edit-profile-container">
+    <div class="edit-profile-header">
+      <button class="back-btn" id="backBtn" onclick="handleSettings()">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+      </button>
+      <h2>Edit Profile</h2>
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <form class="edit-profile-form" id="editProfileForm">
+      <div class="form-section">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="@username"
+            maxlength="30"
+            required
+          />
+          <small class="form-help"
+            >Your unique username (3-30 characters, letters, numbers,
+            underscores only)</small
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="displayName">Display Name</label>
+          <input
+            type="text"
+            id="displayName"
+            name="displayName"
+            placeholder="Your display name"
+            maxlength="50"
+          />
+          <small class="form-help"
+            >This is how your name appears to others</small
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Bio</label>
+          <textarea
+            id="bio"
+            name="bio"
+            placeholder="Tell us about yourself..."
+            maxlength="150"
+            rows="3"
+          ></textarea>
+          <div class="char-count"><span id="bioCharCount">0</span>/150</div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Personal Information</h3>
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="First name"
+            maxlength="50"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Last name"
+            maxlength="50"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your@email.com"
+          />
+          <small class="form-help">Email changes require verification</small>
+        </div>
+
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input
+            type="url"
+            id="website"
+            name="website"
+            placeholder="https://yourwebsite.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="City, Country"
+            maxlength="100"
+          />
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Privacy</h3>
+
+        <div class="form-group privacy-toggle">
+          <div class="toggle-info">
+            <label for="privateAccount">Private Account</label>
+            <small
+              >When your account is private, only followers you approve can see
+              your posts</small
+            >
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="privateAccount" name="privateAccount" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </form>
+
+    <div class="form-actions">
+      <button type="button" class="cancel-btn" id="cancelBtn" onclick="handleSettings()">Cancel</button>
+      <button type="submit" class="submit-btn" id="submitBtn">
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>

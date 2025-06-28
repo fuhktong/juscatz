@@ -1,0 +1,193 @@
+<div class="privacy-page">
+  <div class="privacy-container">
+    <div class="privacy-header">
+      <button class="back-btn" id="backBtn" onclick="handleSettings()">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+      </button>
+      <h2>Privacy</h2>
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <form class="privacy-form" id="privacyForm">
+      <div class="form-section">
+        <h3>Account Privacy</h3>
+        
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="privateAccount">Private Account</label>
+            <small>When your account is private, only followers you approve can see your posts</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="privateAccount" name="privateAccount" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Who Can See Your Content</h3>
+        
+        <div class="form-group">
+          <label for="whoCanSeePhotos">Photos and Posts</label>
+          <select class="privacy-select" id="whoCanSeePhotos" name="whoCanSeePhotos">
+            <option value="everyone">Everyone</option>
+            <option value="followers">Followers</option>
+            <option value="close_friends">Close Friends</option>
+            <option value="only_me">Only Me</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="whoCanSeePosts">Story</label>
+          <select class="privacy-select" id="whoCanSeePosts" name="whoCanSeePosts">
+            <option value="everyone">Everyone</option>
+            <option value="followers">Followers</option>
+            <option value="close_friends">Close Friends</option>
+            <option value="only_me">Only Me</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Who Can Contact You</h3>
+        
+        <div class="form-group">
+          <label for="whoCanMessage">Direct Messages</label>
+          <select class="privacy-select" id="whoCanMessage" name="whoCanMessage">
+            <option value="everyone">Everyone</option>
+            <option value="followers">People You Follow</option>
+            <option value="no_one">No One</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="whoCanComment">Comments</label>
+          <select class="privacy-select" id="whoCanComment" name="whoCanComment">
+            <option value="everyone">Everyone</option>
+            <option value="followers">People You Follow</option>
+            <option value="mentioned">People You Follow and Mention</option>
+            <option value="no_one">No One</option>
+          </select>
+        </div>
+
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="allowMentions">Allow Others to Tag You</label>
+            <small>Let people tag you in their posts and stories</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="allowMentions" name="allowMentions" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Activity Status</h3>
+        
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="showActivity">Show Activity Status</label>
+            <small>Let followers see when you were last active</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="showActivity" name="showActivity" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="showOnlineStatus">Show Online Status</label>
+            <small>Let people see when you're currently online</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="showOnlineStatus" name="showOnlineStatus" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Search & Discovery</h3>
+        
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="searchableByEmail">Findable by Email</label>
+            <small>Let people find your account using your email address</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="searchableByEmail" name="searchableByEmail" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="searchableByPhone">Findable by Phone Number</label>
+            <small>Let people find your account using your phone number</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="searchableByPhone" name="searchableByPhone" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="suggestToFriends">Suggest Account to Others</label>
+            <small>Include your account when suggesting accounts to other people</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="suggestToFriends" name="suggestToFriends" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Data & History</h3>
+        
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="saveLoginInfo">Save Login Information</label>
+            <small>Save your login info to log in faster next time</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="saveLoginInfo" name="saveLoginInfo" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group toggle-group">
+          <div class="toggle-info">
+            <label for="useDataForAds">Use Data for Ads</label>
+            <small>Use your data to show more relevant advertisements</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="useDataForAds" name="useDataForAds" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </form>
+
+    <div class="form-actions">
+      <button type="button" class="cancel-btn" id="cancelBtn" onclick="handleSettings()">Cancel</button>
+      <button type="submit" class="submit-btn" id="submitBtn">
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>

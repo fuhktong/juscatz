@@ -13,6 +13,7 @@
   align-items: center;
   padding: 8px 0;
   height: var(--bottom-nav-height);
+  z-index: 1000;
 }
 
 .nav-btn {
