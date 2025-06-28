@@ -17,6 +17,21 @@ async function loadSettingsPage(container) {
 
 // Initialize settings functionality
 function initializeSettings() {
+    // Add user info functionality
+    const userInfoBtn = document.getElementById('userInfoBtn');
+    if (userInfoBtn) {
+        userInfoBtn.addEventListener('click', () => {
+            if (window.loadPageWithJS) {
+                window.loadPageWithJS('userinfo', () => {
+                    const contentArea = document.getElementById('page-content');
+                    if (window.UserInfoPage && contentArea) {
+                        window.UserInfoPage.loadUserInfoPage(contentArea);
+                    }
+                });
+            }
+        });
+    }
+    
     // Add edit profile functionality
     const editProfileBtn = document.getElementById('editProfileBtn');
     if (editProfileBtn) {
@@ -78,6 +93,29 @@ function initializeSettings() {
     if (darkModeToggle) {
         darkModeToggle.addEventListener('change', toggleDarkMode);
     }
+    
+    // Add notification toggle functionality
+    const pushNotificationsMaster = document.getElementById('pushNotificationsMaster');
+    if (pushNotificationsMaster) {
+        pushNotificationsMaster.addEventListener('change', toggleNotificationSubItems);
+        // Initialize the state on page load
+        toggleNotificationSubItems({ target: pushNotificationsMaster });
+    }
+    
+    // Add about page functionality
+    const aboutBtn = document.getElementById('aboutBtn');
+    if (aboutBtn) {
+        aboutBtn.addEventListener('click', () => {
+            if (window.loadPageWithJS) {
+                window.loadPageWithJS('about', () => {
+                    const contentArea = document.getElementById('page-content');
+                    if (window.AboutPage && contentArea) {
+                        window.AboutPage.loadAboutPage(contentArea);
+                    }
+                });
+            }
+        });
+    }
 }
 
 // Toggle dark mode
@@ -89,6 +127,25 @@ function toggleDarkMode(event) {
     } else {
         document.body.classList.remove('dark-mode');
         localStorage.setItem('darkMode', 'disabled');
+    }
+}
+
+// Toggle notification sub-items visibility
+function toggleNotificationSubItems(event) {
+    const isEnabled = event.target.checked;
+    const subItems = document.getElementById('notificationSubItems');
+    
+    if (subItems) {
+        if (isEnabled) {
+            subItems.classList.remove('hidden');
+        } else {
+            subItems.classList.add('hidden');
+            // Also disable all sub-toggles when master is disabled
+            const subToggles = subItems.querySelectorAll('input[type="checkbox"]');
+            subToggles.forEach(toggle => {
+                toggle.checked = false;
+            });
+        }
     }
 }
 

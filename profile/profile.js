@@ -113,12 +113,20 @@ async function loadUserProfile() {
 function displayUserProfile(user) {
     document.getElementById('profileUsername').textContent = `@${user.username}`;
     
-    // Create display name from first_name and last_name
-    const displayName = [user.first_name, user.last_name].filter(Boolean).join(' ') || user.username;
+    // Use display_name from profiles table, fallback to first/last name, then username
+    const displayName = user.display_name || 
+                       [user.first_name, user.last_name].filter(Boolean).join(' ') || 
+                       user.username;
     document.getElementById('profileDisplayName').textContent = displayName;
     
-    // Set bio to empty since we removed it from users table
-    document.getElementById('profileBio').textContent = '';
+    // Use bio from profiles table
+    document.getElementById('profileBio').textContent = user.bio || '';
+    
+    // Update website if it exists (add website section if needed)
+    updateWebsiteSection(user.website);
+    
+    // Update privacy status (add privacy indicator if needed)
+    updatePrivacyStatus(user.is_private);
     
     // Stats - only post_count is available now
     document.getElementById('postCount').textContent = user.post_count || 0;
@@ -129,6 +137,49 @@ function displayUserProfile(user) {
     const profilePicture = document.getElementById('profilePicture');
     if (user.profile_picture) {
         profilePicture.src = user.profile_picture;
+    }
+}
+
+// Update website section
+function updateWebsiteSection(website) {
+    let websiteElement = document.getElementById('profileWebsite');
+    
+    if (website) {
+        if (!websiteElement) {
+            // Create website element if it doesn't exist
+            const bioElement = document.getElementById('profileBio');
+            websiteElement = document.createElement('div');
+            websiteElement.id = 'profileWebsite';
+            websiteElement.className = 'profile-website';
+            bioElement.parentNode.insertBefore(websiteElement, bioElement.nextSibling);
+        }
+        
+        // Clean up URL for display
+        const displayUrl = website.replace(/^https?:\/\//, '').replace(/\/$/, '');
+        websiteElement.innerHTML = `<a href="${website}" target="_blank" rel="noopener noreferrer">${displayUrl}</a>`;
+    } else if (websiteElement) {
+        // Remove website element if no website
+        websiteElement.remove();
+    }
+}
+
+// Update privacy status
+function updatePrivacyStatus(isPrivate) {
+    let privacyElement = document.getElementById('profilePrivacy');
+    
+    if (isPrivate) {
+        if (!privacyElement) {
+            // Create privacy indicator if it doesn't exist
+            const usernameElement = document.getElementById('profileUsername');
+            privacyElement = document.createElement('div');
+            privacyElement.id = 'profilePrivacy';
+            privacyElement.className = 'profile-privacy';
+            usernameElement.parentNode.insertBefore(privacyElement, usernameElement.nextSibling);
+        }
+        privacyElement.textContent = '🔒 Private Account';
+    } else if (privacyElement) {
+        // Remove privacy indicator if account is public
+        privacyElement.remove();
     }
 }
 
@@ -167,32 +218,27 @@ async function loadUserPosts() {
     
     try {
         // Fetch user's posts from API
-        const response = await fetch('/posts/posts.php?user_id=1');
+        const response = await fetch('/posts/posts.php?action=get_user_posts&user_id=1');
         const result = await response.json();
         
-        if (!response.ok) {
-            throw new Error(result.error || 'Failed to load posts');
+        if (!result.success) {
+            throw new Error(result.message || 'Failed to load posts');
         }
         
         const posts = result.posts || [];
         
         if (posts.length === 0) {
-            postsGrid.innerHTML = `
-                <div class="profile-empty">
-                    <div class="profile-empty-icon">📷</div>
-                    <p>No posts yet</p>
-                    <button class="profile-empty-btn" onclick="window.loadPage && window.loadPage('post')">
-                        Create your first post
-                    </button>
-                </div>
-            `;
+            postsGrid.innerHTML = '<div class="profile-loading">No posts yet</div>';
         } else {
             postsGrid.innerHTML = posts.map(post => `
                 <div class="profile-post-item" data-post-id="${post.id}">
-                    <img src="${post.image_url}" alt="Post" class="profile-post-image">
+                    <img src="${post.media_url}" alt="Post" class="profile-post-image">
                     <div class="profile-post-overlay">
                         <div class="profile-post-stats">
-                            <span class="profile-post-caption">${post.caption || ''}</span>
+                            <div class="profile-post-engagement">
+                                <span>❤️ ${post.like_count}</span>
+                                <span>💬 ${post.comment_count}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,7 +249,7 @@ async function loadUserPosts() {
                 item.addEventListener('click', () => {
                     const postId = item.dataset.postId;
                     // Navigate to post detail view
-                    console.log('Navigate to post:', postId);
+                    window.location.href = `?page=posts&id=${postId}`;
                 });
             });
         }
@@ -216,13 +262,13 @@ async function loadUserPosts() {
 // Load liked posts (placeholder)
 function loadLikedPosts() {
     const likedGrid = document.getElementById('likedGrid');
-    likedGrid.innerHTML = '<div class="profile-empty">No liked posts yet</div>';
+    likedGrid.innerHTML = '<div class="profile-loading">No liked posts yet</div>';
 }
 
 // Load saved posts (placeholder)
 function loadSavedPosts() {
     const savedGrid = document.getElementById('savedGrid');
-    savedGrid.innerHTML = '<div class="profile-empty">No saved posts yet</div>';
+    savedGrid.innerHTML = '<div class="profile-loading">No saved posts yet</div>';
 }
 
 // Open edit profile modal

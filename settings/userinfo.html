@@ -1,0 +1,73 @@
+<div class="userinfo-page">
+  <div class="userinfo-container">
+    <div class="userinfo-header">
+      <button class="back-btn" id="backBtn" onclick="handleSettings()">
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+      </button>
+      <h2>User Info</h2>
+      <button class="save-btn" id="saveBtn">Save</button>
+    </div>
+
+    <form class="userinfo-form" id="userinfoForm">
+      <div class="form-section">
+        <h3>Personal Information</h3>
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="First name"
+            maxlength="50"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Last name"
+            maxlength="50"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your@email.com"
+          />
+          <small class="form-help">Email changes require verification</small>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="City, Country"
+            maxlength="100"
+          />
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

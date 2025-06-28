@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $profilePictureUrl = 'profile/profile_pictures/' . $filename;
         
         // Insert or update profile
-        $stmt = $pdo->prepare("INSERT INTO profiles (user_id, profile_picture) VALUES (?, ?) ON DUPLICATE KEY UPDATE profile_picture = ?, updated_at = NOW()");
+        $stmt = $pdo->prepare("INSERT INTO profile (user_id, profile_picture) VALUES (?, ?) ON DUPLICATE KEY UPDATE profile_picture = ?, updated_at = NOW()");
         $stmt->execute([$userId, $profilePictureUrl, $profilePictureUrl]);
         
         echo json_encode([
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
             SELECT u.username, u.first_name, u.last_name, u.email,
                    p.display_name, p.bio, p.website, p.location, p.is_private, p.profile_picture
             FROM users u 
-            LEFT JOIN profiles p ON u.id = p.user_id 
+            LEFT JOIN profile p ON u.id = p.user_id 
             WHERE u.id = ?
         ");
         $stmt->execute([$userId]);

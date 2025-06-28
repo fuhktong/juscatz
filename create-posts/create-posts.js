@@ -1,22 +1,22 @@
-// Post Creation Page JavaScript
+// Create Posts Page JavaScript
 
-// Load post creation page
-async function loadPostPage(container) {
+// Load create posts page
+async function loadCreatePostsPage(container) {
     try {
-        const response = await fetch('/posts/post.html');
+        const response = await fetch('/create-posts/create-posts.html');
         const html = await response.text();
         container.innerHTML = html;
         
-        // Initialize post creation functionality
-        initializePostCreation();
+        // Initialize create posts functionality
+        initializeCreatePosts();
     } catch (error) {
-        console.error('Failed to load post page:', error);
-        container.innerHTML = '<div class="post-error">Failed to load post page</div>';
+        console.error('Failed to load create posts page:', error);
+        container.innerHTML = '<div class="create-posts-error">Failed to load create posts page</div>';
     }
 }
 
-// Initialize post creation functionality
-function initializePostCreation() {
+// Initialize create posts functionality
+function initializeCreatePosts() {
     const uploadArea = document.getElementById('uploadArea');
     const fileInput = document.getElementById('fileInput');
     const uploadPlaceholder = document.getElementById('uploadPlaceholder');
@@ -38,17 +38,17 @@ function initializePostCreation() {
 
     uploadArea.addEventListener('dragover', (e) => {
         e.preventDefault();
-        uploadArea.classList.add('post-upload-dragover');
+        uploadArea.classList.add('create-posts-upload-dragover');
     });
 
     uploadArea.addEventListener('dragleave', (e) => {
         e.preventDefault();
-        uploadArea.classList.remove('post-upload-dragover');
+        uploadArea.classList.remove('create-posts-upload-dragover');
     });
 
     uploadArea.addEventListener('drop', (e) => {
         e.preventDefault();
-        uploadArea.classList.remove('post-upload-dragover');
+        uploadArea.classList.remove('create-posts-upload-dragover');
         
         const files = e.dataTransfer.files;
         if (files.length > 0) {
@@ -157,9 +157,9 @@ function initializePostCreation() {
         submitBtn.disabled = !hasFile;
         
         if (hasFile) {
-            submitBtn.classList.add('post-submit-enabled');
+            submitBtn.classList.add('create-posts-submit-enabled');
         } else {
-            submitBtn.classList.remove('post-submit-enabled');
+            submitBtn.classList.remove('create-posts-submit-enabled');
         }
     }
 
@@ -170,8 +170,8 @@ function initializePostCreation() {
             return;
         }
 
-        const submitText = document.querySelector('.post-submit-text');
-        const submitLoader = document.querySelector('.post-submit-loader');
+        const submitText = document.querySelector('.create-posts-submit-text');
+        const submitLoader = document.querySelector('.create-posts-submit-loader');
         
         // Show loading state
         submitBtn.disabled = true;
@@ -188,7 +188,7 @@ function initializePostCreation() {
             formData.append('show_in_feed', document.getElementById('showInFeedCheckbox').checked);
 
             // Submit to API
-            const response = await fetch('/posts/posts.php', {
+            const response = await fetch('/create-posts/create-posts.php', {
                 method: 'POST',
                 body: formData
             });
@@ -244,10 +244,10 @@ function initializePostCreation() {
     // Show success message
     function showSuccessMessage(message) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'post-message post-success';
+        messageDiv.className = 'create-posts-message create-posts-success';
         messageDiv.textContent = message;
         
-        const container = document.querySelector('.post-create-container');
+        const container = document.querySelector('.create-posts-create-container');
         container.insertBefore(messageDiv, container.firstChild);
         
         setTimeout(() => {
@@ -260,10 +260,10 @@ function initializePostCreation() {
     // Show error message
     function showErrorMessage(message) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'post-message post-error';
+        messageDiv.className = 'create-posts-message create-posts-error';
         messageDiv.textContent = message;
         
-        const container = document.querySelector('.post-create-container');
+        const container = document.querySelector('.create-posts-create-container');
         container.insertBefore(messageDiv, container.firstChild);
         
         setTimeout(() => {
@@ -276,7 +276,7 @@ function initializePostCreation() {
 
 // Export functions for use in main app
 if (typeof window !== 'undefined') {
-    window.PostPage = {
-        loadPostPage
+    window.CreatePostsPage = {
+        loadCreatePostsPage
     };
 }

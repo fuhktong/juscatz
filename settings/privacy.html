@@ -3,8 +3,8 @@
     <div class="privacy-header">
       <button class="back-btn" id="backBtn" onclick="handleSettings()">
         <svg
-          width="16"
-          height="16"
+          width="30"
+          height="30"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -40,6 +40,20 @@
         
         <div class="form-group">
           <label for="whoCanSeePhotos">Photos and Posts</label>
+          <div class="custom-dropdown" data-select="whoCanSeePhotos">
+            <div class="custom-dropdown-trigger" tabindex="0">
+              <span class="selected-text">Followers</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6,9 12,15 18,9"></polyline>
+              </svg>
+            </div>
+            <div class="custom-dropdown-options">
+              <div class="dropdown-option" data-value="everyone">Everyone</div>
+              <div class="dropdown-option selected" data-value="followers">Followers</div>
+              <div class="dropdown-option" data-value="close_friends">Close Friends</div>
+              <div class="dropdown-option" data-value="only_me">Only Me</div>
+            </div>
+          </div>
           <select class="privacy-select" id="whoCanSeePhotos" name="whoCanSeePhotos">
             <option value="everyone">Everyone</option>
             <option value="followers">Followers</option>
@@ -50,6 +64,20 @@
 
         <div class="form-group">
           <label for="whoCanSeePosts">Story</label>
+          <div class="custom-dropdown" data-select="whoCanSeePosts">
+            <div class="custom-dropdown-trigger" tabindex="0">
+              <span class="selected-text">Followers</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6,9 12,15 18,9"></polyline>
+              </svg>
+            </div>
+            <div class="custom-dropdown-options">
+              <div class="dropdown-option" data-value="everyone">Everyone</div>
+              <div class="dropdown-option selected" data-value="followers">Followers</div>
+              <div class="dropdown-option" data-value="close_friends">Close Friends</div>
+              <div class="dropdown-option" data-value="only_me">Only Me</div>
+            </div>
+          </div>
           <select class="privacy-select" id="whoCanSeePosts" name="whoCanSeePosts">
             <option value="everyone">Everyone</option>
             <option value="followers">Followers</option>
@@ -64,6 +92,19 @@
         
         <div class="form-group">
           <label for="whoCanMessage">Direct Messages</label>
+          <div class="custom-dropdown" data-select="whoCanMessage">
+            <div class="custom-dropdown-trigger" tabindex="0">
+              <span class="selected-text">People You Follow</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6,9 12,15 18,9"></polyline>
+              </svg>
+            </div>
+            <div class="custom-dropdown-options">
+              <div class="dropdown-option" data-value="everyone">Everyone</div>
+              <div class="dropdown-option selected" data-value="followers">People You Follow</div>
+              <div class="dropdown-option" data-value="no_one">No One</div>
+            </div>
+          </div>
           <select class="privacy-select" id="whoCanMessage" name="whoCanMessage">
             <option value="everyone">Everyone</option>
             <option value="followers">People You Follow</option>
@@ -73,6 +114,20 @@
 
         <div class="form-group">
           <label for="whoCanComment">Comments</label>
+          <div class="custom-dropdown" data-select="whoCanComment">
+            <div class="custom-dropdown-trigger" tabindex="0">
+              <span class="selected-text">Everyone</span>
+              <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6,9 12,15 18,9"></polyline>
+              </svg>
+            </div>
+            <div class="custom-dropdown-options">
+              <div class="dropdown-option selected" data-value="everyone">Everyone</div>
+              <div class="dropdown-option" data-value="followers">People You Follow</div>
+              <div class="dropdown-option" data-value="mentioned">People You Follow and Mention</div>
+              <div class="dropdown-option" data-value="no_one">No One</div>
+            </div>
+          </div>
           <select class="privacy-select" id="whoCanComment" name="whoCanComment">
             <option value="everyone">Everyone</option>
             <option value="followers">People You Follow</option>
@@ -183,11 +238,5 @@
       </div>
     </form>
 
-    <div class="form-actions">
-      <button type="button" class="cancel-btn" id="cancelBtn" onclick="handleSettings()">Cancel</button>
-      <button type="submit" class="submit-btn" id="submitBtn">
-        Save Changes
-      </button>
-    </div>
   </div>
 </div>

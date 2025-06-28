@@ -1,0 +1,71 @@
+<div class="create-posts-page">
+    <div class="create-posts-create-container">
+        <div class="create-posts-header">
+            <h2>Create New Post</h2>
+            <button class="create-posts-cancel-btn" id="cancelBtn">Cancel</button>
+        </div>
+        
+        <div class="create-posts-upload-section">
+            <div class="create-posts-upload-area" id="uploadArea">
+                <div class="create-posts-upload-placeholder" id="uploadPlaceholder">
+                    <div class="create-posts-upload-icon">📸</div>
+                    <p class="create-posts-upload-text">Tap to upload cat photo or video</p>
+                    <p class="create-posts-upload-subtext">JPG, PNG, MP4 up to 10MB</p>
+                </div>
+                <div class="create-posts-preview-container" id="previewContainer" style="display: none;">
+                    <img class="create-posts-preview-image" id="previewImage" style="display: none;">
+                    <video class="create-posts-preview-video" id="previewVideo" controls style="display: none;"></video>
+                    <button class="create-posts-remove-media" id="removeMediaBtn">✕</button>
+                </div>
+            </div>
+            <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;">
+        </div>
+
+        <div class="create-posts-form-section">
+            <div class="create-posts-input-group">
+                <label for="captionInput" class="create-posts-label">Caption</label>
+                <textarea 
+                    id="captionInput" 
+                    class="create-posts-caption-input" 
+                    placeholder="Write a caption... #hashtags"
+                    maxlength="2000"
+                ></textarea>
+                <div class="create-posts-char-count">
+                    <span id="charCount">0</span>/2000
+                </div>
+            </div>
+
+            <div class="create-posts-input-group">
+                <label for="locationInput" class="create-posts-label">Location (Optional)</label>
+                <input 
+                    type="text" 
+                    id="locationInput" 
+                    class="create-posts-location-input" 
+                    placeholder="Add location..."
+                >
+            </div>
+
+            <div class="create-posts-settings">
+                <div class="create-posts-setting-item">
+                    <label class="create-posts-setting-label">
+                        <input type="checkbox" id="allowCommentsCheckbox" checked>
+                        <span class="create-posts-setting-text">Allow comments</span>
+                    </label>
+                </div>
+                <div class="create-posts-setting-item">
+                    <label class="create-posts-setting-label">
+                        <input type="checkbox" id="showInFeedCheckbox" checked>
+                        <span class="create-posts-setting-text">Show in public feed</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="create-posts-actions">
+            <button class="create-posts-submit-btn" id="postSubmitBtn" disabled>
+                <span class="create-posts-submit-text">Share Post</span>
+                <span class="create-posts-submit-loader" style="display: none;">⟳</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -32,7 +32,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 0;
-  border-bottom: 1px solid #f0f0f0;
 }
 
 .settings-item:last-child {
@@ -111,6 +110,31 @@
 
 .settings-toggle input:checked + .settings-toggle-slider:before {
   transform: translateX(20px);
+}
+
+/* Notification Sub-items */
+.notification-sub-items {
+  margin: 0;
+  max-height: 300px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.notification-sub-items.hidden {
+  max-height: 0;
+}
+
+.settings-sub-item {
+  padding: 10px 0;
+}
+
+.settings-sub-item:last-child {
+  border-bottom: none;
+}
+
+.settings-sub-item .settings-label {
+  font-size: 13px;
+  color: #666;
 }
 
 /* Danger Section */

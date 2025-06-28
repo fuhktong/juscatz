@@ -26,11 +26,8 @@ function initializePrivacy() {
         saveBtn.addEventListener('click', savePrivacySettings);
     }
     
-    // Submit button
-    const submitBtn = document.getElementById('submitBtn');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', savePrivacySettings);
-    }
+    // Initialize custom dropdowns
+    initializeCustomDropdowns();
     
     // Form submission
     const form = document.getElementById('privacyForm');
@@ -40,6 +37,73 @@ function initializePrivacy() {
             savePrivacySettings();
         });
     }
+}
+
+// Initialize custom dropdown functionality
+function initializeCustomDropdowns() {
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.custom-dropdown-trigger');
+        const options = dropdown.querySelector('.custom-dropdown-options');
+        const selectElement = document.getElementById(dropdown.dataset.select);
+        
+        // Toggle dropdown on click
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllDropdowns();
+            dropdown.classList.toggle('open');
+            trigger.classList.toggle('open');
+            options.classList.toggle('open');
+        });
+        
+        // Handle keyboard navigation
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                trigger.click();
+            }
+        });
+        
+        // Handle option selection
+        const optionElements = dropdown.querySelectorAll('.dropdown-option');
+        optionElements.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Update selected option
+                optionElements.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                
+                // Update trigger text
+                const selectedText = trigger.querySelector('.selected-text');
+                selectedText.textContent = option.textContent;
+                
+                // Update hidden select element
+                if (selectElement) {
+                    selectElement.value = option.dataset.value;
+                }
+                
+                // Close dropdown
+                dropdown.classList.remove('open');
+                trigger.classList.remove('open');
+                options.classList.remove('open');
+            });
+        });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', closeAllDropdowns);
+}
+
+// Close all open dropdowns
+function closeAllDropdowns() {
+    const openDropdowns = document.querySelectorAll('.custom-dropdown.open');
+    openDropdowns.forEach(dropdown => {
+        dropdown.classList.remove('open');
+        dropdown.querySelector('.custom-dropdown-trigger').classList.remove('open');
+        dropdown.querySelector('.custom-dropdown-options').classList.remove('open');
+    });
 }
 
 // Load current privacy settings

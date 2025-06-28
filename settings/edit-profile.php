@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 try {
     // Database connection
-    require_once '../config.php';
+    require_once '../api/config.php';
     
     // Get POST data
     $username = trim($_POST['username'] ?? '');
@@ -27,7 +27,7 @@ try {
     $email = trim($_POST['email'] ?? '');
     $website = trim($_POST['website'] ?? '');
     $location = trim($_POST['location'] ?? '');
-    $is_private = ($_POST['is_private'] ?? '0') === '1';
+    $is_private = isset($_POST['is_private']) && $_POST['is_private'] === '1' ? 1 : 0;
     
     // Validation
     if (empty($username)) {
@@ -50,9 +50,17 @@ try {
         exit;
     }
     
-    if (!empty($website) && !filter_var($website, FILTER_VALIDATE_URL)) {
-        echo json_encode(['success' => false, 'message' => 'Invalid website URL']);
-        exit;
+    if (!empty($website)) {
+        // Add https:// if no protocol is provided
+        if (!preg_match('/^https?:\/\//', $website)) {
+            $website = 'https://' . $website;
+        }
+        
+        // Now validate the URL
+        if (!filter_var($website, FILTER_VALIDATE_URL)) {
+            echo json_encode(['success' => false, 'message' => 'Invalid website URL']);
+            exit;
+        }
     }
     
     // For development, use user_id = 1
@@ -85,14 +93,14 @@ try {
         if ($profile_exists) {
             // Update existing profile
             $sql = "UPDATE profiles SET display_name = ?, bio = ?, website = ?, location = ?, is_private = ? WHERE user_id = ?";
-            $params = [$display_name, $bio, $website, $location, $is_private, $user_id];
+            $params = [$display_name, $bio, $website, $location, (int)$is_private, $user_id];
             
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
         } else {
             // Create new profile
             $sql = "INSERT INTO profiles (user_id, display_name, bio, website, location, is_private) VALUES (?, ?, ?, ?, ?, ?)";
-            $params = [$user_id, $display_name, $bio, $website, $location, $is_private];
+            $params = [$user_id, $display_name, $bio, $website, $location, (int)$is_private];
             
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);

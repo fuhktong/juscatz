@@ -146,8 +146,16 @@ function loadPage(page) {
                 break;
             case 'post':
                 loadPageWithJS('post', () => {
-                    if (window.PostPage) {
-                        window.PostPage.loadPostPage(contentArea);
+                    if (window.CreatePostsPage) {
+                        window.CreatePostsPage.loadCreatePostsPage(contentArea);
+                    }
+                });
+                break;
+            case 'posts':
+                const postId = getUrlParameter('id') || getUrlParameter('post_id');
+                loadPageWithJS('posts', () => {
+                    if (window.PostsPage) {
+                        window.PostsPage.loadPostsPage(contentArea, postId);
                     }
                 });
                 break;
@@ -195,7 +203,9 @@ function loadPageCSS(pageName) {
     if (pageName === 'profile') {
         link.href = `profile/profile.css`;
     } else if (pageName === 'post') {
-        link.href = `posts/post.css`;
+        link.href = `create-posts/create-posts.css`;
+    } else if (pageName === 'posts') {
+        link.href = `posts/posts.css`;
     } else if (pageName === 'settings') {
         link.href = `settings/settings.css`;
     } else if (pageName === 'edit-profile') {
@@ -204,6 +214,10 @@ function loadPageCSS(pageName) {
         link.href = `settings/privacy.css`;
     } else if (pageName === 'change-password') {
         link.href = `settings/change-password.css`;
+    } else if (pageName === 'userinfo') {
+        link.href = `settings/userinfo.css`;
+    } else if (pageName === 'about') {
+        link.href = `settings/about.css`;
     } else {
         link.href = `pages/${pageName}.css`;
     }
@@ -227,7 +241,9 @@ function loadPageWithJS(pageName, callback) {
     if (pageName === 'profile') {
         script.src = `profile/profile.js`;
     } else if (pageName === 'post') {
-        script.src = `posts/post.js`;
+        script.src = `create-posts/create-posts.js`;
+    } else if (pageName === 'posts') {
+        script.src = `posts/posts.js`;
     } else if (pageName === 'settings') {
         script.src = `settings/settings.js`;
     } else if (pageName === 'edit-profile') {
@@ -236,6 +252,10 @@ function loadPageWithJS(pageName, callback) {
         script.src = `settings/privacy.js`;
     } else if (pageName === 'change-password') {
         script.src = `settings/change-password.js`;
+    } else if (pageName === 'userinfo') {
+        script.src = `settings/userinfo.js`;
+    } else if (pageName === 'about') {
+        script.src = `settings/about.js`;
     } else {
         script.src = `pages/${pageName}.js`;
     }
@@ -284,3 +304,9 @@ function displayUserInfo() {
 }
 
 // AuthManager is loaded from auth.js
+
+// Helper function to get URL parameters
+function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}

@@ -1,0 +1,164 @@
+<div class="posts-page">
+  <div class="posts-container">
+    <!-- Header -->
+    <div class="posts-header">
+      <button class="back-btn" id="backBtn" onclick="window.history.back()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+      </button>
+      <h2>Post</h2>
+      <button class="more-btn" id="moreBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="19" cy="12" r="1"></circle>
+          <circle cx="5" cy="12" r="1"></circle>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Post Content -->
+    <div class="posts-content">
+      <!-- User Info -->
+      <div class="posts-user-info">
+        <div class="posts-user-avatar">
+          <img src="/images/default-profile-pic.png" alt="User Avatar" id="userAvatar">
+        </div>
+        <div class="posts-user-details">
+          <h3 class="posts-username" id="postUsername">Loading...</h3>
+          <p class="posts-timestamp" id="postTimestamp">Loading...</p>
+        </div>
+      </div>
+
+      <!-- Media Content -->
+      <div class="posts-media-container" id="mediaContainer">
+        <img class="posts-media-image" id="postImage" style="display: none;" alt="Post Image">
+        <video class="posts-media-video" id="postVideo" style="display: none;" controls>
+          Your browser does not support the video tag.
+        </video>
+        <!-- Double-tap overlay for likes -->
+        <div class="posts-like-overlay" id="likeOverlay">
+          <svg class="posts-like-heart" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Caption -->
+      <div class="posts-caption" id="postCaption" style="display: none;">
+        <span class="posts-caption-username" id="captionUsername"></span>
+        <span class="posts-caption-text" id="captionText"></span>
+      </div>
+
+      <!-- Engagement Buttons -->
+      <div class="posts-engagement">
+        <div class="posts-actions">
+          <button class="posts-action-btn posts-like-btn" id="likeBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <button class="posts-action-btn posts-comment-btn" id="commentBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <button class="posts-action-btn posts-share-btn" id="shareBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+        </div>
+        <div class="posts-save-btn">
+          <button class="posts-action-btn" id="saveBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Like Count -->
+      <div class="posts-like-count" id="likeCount" style="display: none;">
+        <span id="likeCountText">0 likes</span>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="posts-comments-section">
+        <div class="posts-comments-header">
+          <h4>Comments</h4>
+          <span class="posts-comment-count" id="commentCount">0</span>
+        </div>
+        
+        <!-- Comments List -->
+        <div class="posts-comments-list" id="commentsList">
+          <!-- Comments will be loaded here -->
+        </div>
+
+        <!-- Add Comment -->
+        <div class="posts-add-comment">
+          <div class="posts-comment-avatar">
+            <img src="/images/default-profile-pic.png" alt="Your Avatar" id="currentUserAvatar">
+          </div>
+          <div class="posts-comment-input-container">
+            <input 
+              type="text" 
+              class="posts-comment-input" 
+              id="commentInput" 
+              placeholder="Add a comment..."
+              maxlength="500"
+            >
+            <button class="posts-comment-submit" id="commentSubmitBtn" disabled>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22,2 15,22 11,13 2,9"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="posts-loading" id="loadingState">
+      <div class="posts-loading-spinner"></div>
+      <p>Loading post...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="posts-error" id="errorState" style="display: none;">
+      <h3>Post not found</h3>
+      <p>This post may have been deleted or you don't have permission to view it.</p>
+      <button class="posts-error-btn" onclick="window.history.back()">Go Back</button>
+    </div>
+  </div>
+
+  <!-- Share Modal -->
+  <div class="posts-share-modal" id="shareModal" style="display: none;">
+    <div class="posts-share-content">
+      <div class="posts-share-header">
+        <h3>Share Post</h3>
+        <button class="posts-share-close" id="shareCloseBtn">×</button>
+      </div>
+      <div class="posts-share-options">
+        <button class="posts-share-option" data-share="copy">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          Copy Link
+        </button>
+        <button class="posts-share-option" data-share="message">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

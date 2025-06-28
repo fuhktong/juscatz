@@ -5,11 +5,28 @@
     <div class="settings-section">
       <h3>Account</h3>
       <div class="settings-item">
+        <span class="settings-label">User Info</span>
+        <button class="settings-btn" id="userInfoBtn">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </button>
+      </div>
+      <div class="settings-item">
         <span class="settings-label">Edit Profile</span>
         <button class="settings-btn" id="editProfileBtn">
           <svg
-            width="16"
-            height="16"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -25,8 +42,8 @@
         <span class="settings-label">Privacy</span>
         <button class="settings-btn" id="privacyBtn">
           <svg
-            width="16"
-            height="16"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -42,8 +59,8 @@
         <span class="settings-label">Change Password</span>
         <button class="settings-btn" id="changePasswordBtn">
           <svg
-            width="16"
-            height="16"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -62,30 +79,46 @@
       <div class="settings-item">
         <span class="settings-label">Push Notifications</span>
         <label class="settings-toggle">
-          <input type="checkbox" checked />
+          <input type="checkbox" id="pushNotificationsMaster" checked />
           <span class="settings-toggle-slider"></span>
         </label>
       </div>
-      <div class="settings-item">
-        <span class="settings-label">Email Notifications</span>
-        <label class="settings-toggle">
-          <input type="checkbox" checked />
-          <span class="settings-toggle-slider"></span>
-        </label>
-      </div>
-      <div class="settings-item">
-        <span class="settings-label">Like Notifications</span>
-        <label class="settings-toggle">
-          <input type="checkbox" checked />
-          <span class="settings-toggle-slider"></span>
-        </label>
-      </div>
-      <div class="settings-item">
-        <span class="settings-label">Comment Notifications</span>
-        <label class="settings-toggle">
-          <input type="checkbox" checked />
-          <span class="settings-toggle-slider"></span>
-        </label>
+      <div class="notification-sub-items hidden" id="notificationSubItems">
+        <div class="settings-item settings-sub-item">
+          <span class="settings-label">Likes</span>
+          <label class="settings-toggle">
+            <input type="checkbox" id="likesNotification" checked />
+            <span class="settings-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-item settings-sub-item">
+          <span class="settings-label">Comments</span>
+          <label class="settings-toggle">
+            <input type="checkbox" id="commentsNotification" checked />
+            <span class="settings-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-item settings-sub-item">
+          <span class="settings-label">New followers</span>
+          <label class="settings-toggle">
+            <input type="checkbox" id="followersNotification" checked />
+            <span class="settings-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-item settings-sub-item">
+          <span class="settings-label">Follow Requests (Private)</span>
+          <label class="settings-toggle">
+            <input type="checkbox" id="followRequestsNotification" checked />
+            <span class="settings-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-item settings-sub-item">
+          <span class="settings-label">Tagged in photo/posts</span>
+          <label class="settings-toggle">
+            <input type="checkbox" id="taggedNotification" checked />
+            <span class="settings-toggle-slider"></span>
+          </label>
+        </div>
       </div>
     </div>
 
@@ -99,20 +132,11 @@
         </label>
       </div>
       <div class="settings-item">
-        <span class="settings-label">Language</span>
-        <select class="settings-select">
-          <option value="en">English</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-        </select>
-      </div>
-      <div class="settings-item">
         <span class="settings-label">About</span>
-        <button class="settings-btn">
+        <button class="settings-btn" id="aboutBtn">
           <svg
-            width="16"
-            height="16"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -126,14 +150,13 @@
       </div>
     </div>
 
-
     <div class="settings-section settings-danger-section">
       <div class="settings-item settings-danger-item">
         <span class="settings-label">Log Out</span>
         <button class="settings-btn settings-danger-btn" id="logoutBtn">
           <svg
-            width="16"
-            height="16"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -147,7 +170,20 @@
       </div>
       <div class="settings-item settings-danger-item">
         <span class="settings-label">Delete Account</span>
-        <button class="settings-btn settings-danger-btn">→</button>
+        <button class="settings-btn settings-danger-btn">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </div>

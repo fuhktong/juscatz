@@ -26,11 +26,6 @@ function initializeEditProfile() {
         saveBtn.addEventListener('click', saveProfile);
     }
     
-    // Submit button
-    const submitBtn = document.getElementById('submitBtn');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', saveProfile);
-    }
     
     
     // Bio character counter
@@ -81,12 +76,10 @@ async function loadCurrentProfileData() {
             document.getElementById('username').value = profile.username || '';
             document.getElementById('displayName').value = profile.display_name || '';
             document.getElementById('bio').value = profile.bio || '';
-            document.getElementById('firstName').value = profile.first_name || '';
-            document.getElementById('lastName').value = profile.last_name || '';
-            document.getElementById('email').value = profile.email || '';
             document.getElementById('website').value = profile.website || '';
-            document.getElementById('location').value = profile.location || '';
-            document.getElementById('privateAccount').checked = profile.is_private || false;
+            
+            // Store current privacy setting for preservation
+            window.currentProfileData = profile;
             
             // Update bio character count
             const bioCharCount = document.getElementById('bioCharCount');
@@ -144,12 +137,11 @@ async function saveProfile() {
         formData.append('username', document.getElementById('username').value.trim());
         formData.append('display_name', document.getElementById('displayName').value.trim());
         formData.append('bio', document.getElementById('bio').value.trim());
-        formData.append('first_name', document.getElementById('firstName').value.trim());
-        formData.append('last_name', document.getElementById('lastName').value.trim());
-        formData.append('email', document.getElementById('email').value.trim());
         formData.append('website', document.getElementById('website').value.trim());
-        formData.append('location', document.getElementById('location').value.trim());
-        formData.append('is_private', document.getElementById('privateAccount').checked ? '1' : '0');
+        
+        // Preserve existing is_private value (managed in Privacy settings)
+        const currentPrivacy = window.currentProfileData?.is_private ? '1' : '0';
+        formData.append('is_private', currentPrivacy);
         
         // Send to API
         const response = await fetch('/settings/edit-profile.php', {
@@ -179,7 +171,6 @@ async function saveProfile() {
 // Validate form
 function validateForm() {
     const username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
     const bio = document.getElementById('bio').value;
     
     // Username validation
@@ -190,12 +181,6 @@ function validateForm() {
     
     if (!/^[a-zA-Z0-9_]{3,30}$/.test(username)) {
         showError('Username must be 3-30 characters, letters, numbers, and underscores only');
-        return false;
-    }
-    
-    // Email validation (if provided)
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError('Please enter a valid email address');
         return false;
     }
     
